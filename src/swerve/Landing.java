@@ -25,7 +25,7 @@ import javax.swing.JSlider;
 import javax.swing.JComboBox;
 
 public class Landing extends JFrame {
-	
+	//test
 	private JPanel contentPane;
 
 	/**
