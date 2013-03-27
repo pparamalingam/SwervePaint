@@ -1,15 +1,20 @@
 package tools;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.geom.*;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JPanel;
 
 @SuppressWarnings("unused")
-public abstract class Shape {
-	private LocationVector _pointStart = new LocationVector();
-	private LocationVector _pointEnd = new LocationVector();
-	private Color _color;
-	private int _weight;
-	private int _style;
+public abstract class Shape extends JPanel{
+	protected LocationVector _pointStart;
+	protected LocationVector _pointEnd;
+	protected Color _color;
+	protected int _weight;	//1-10
+	protected int _style;	//1==Solid, 2==Dashed
+	protected BufferedImage _bufImage = null;
 	
 	//getters
 	public abstract LocationVector getPointStart();
@@ -26,4 +31,5 @@ public abstract class Shape {
 	public abstract void setStyle(int x);
 	
 	public abstract boolean resize(LocationVector start, LocationVector end);
+	public abstract void draw();
 }

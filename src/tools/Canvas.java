@@ -1,12 +1,20 @@
 package tools;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Canvas extends Shape {
 		private List<Shape> _shapes = new ArrayList<Shape>();
-		 
+
+		public Canvas(int maxsize) {
+			_pointStart = new LocationVector(0,0);
+			_pointEnd = new LocationVector(maxsize,maxsize);
+			_color = Color.WHITE;
+			_weight = -1;
+			_style = -1;
+		}
 
 		@Override
 		public LocationVector getPointStart() {
@@ -73,4 +81,22 @@ public class Canvas extends Shape {
 			// TODO Auto-generated method stub
 			return false;
 		}
+		
+		public void addToShapeList(Shape x){
+			_shapes.add(x);
+		}
+
+		/*@Override
+		public void draw(Graphics g) {
+			
+		}*/
+
+		@Override
+		public void draw() {
+			for (int i = 0; i < _shapes.size(); i++){
+				_shapes.get(i).draw();
+				System.out.println("DRAW (via canvas)");
+			}
+		}
+
 }

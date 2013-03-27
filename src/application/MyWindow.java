@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 public class MyWindow extends JPanel {
     private static volatile MyWindow instance = null;
 
-    private MyWindow() {       }
+    MyWindow() {       }
 
     public static MyWindow getInstance() {
             if (instance == null) {

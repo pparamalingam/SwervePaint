@@ -1,9 +1,20 @@
 package tools;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 public class Triangle extends Shape {
-
+	
+	public Triangle(LocationVector _tempFirstCoord,
+			LocationVector _tempSecondCoord, Color theColor, int theWeight,
+			int theStyle) {
+		_pointStart = _tempFirstCoord;
+		_pointEnd = _tempSecondCoord;
+		_color = theColor;
+		_weight = theWeight;
+		_style = theStyle;
+	}
+	
 	@Override
 	public LocationVector getPointStart() {
 		// TODO Auto-generated method stub
@@ -68,6 +79,12 @@ public class Triangle extends Shape {
 	public boolean resize(LocationVector start, LocationVector end) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		
 	}
 
 		
