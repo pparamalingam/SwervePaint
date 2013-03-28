@@ -8,12 +8,14 @@ import java.util.List;
 public class Canvas extends Shape {
 		private List<Shape> _shapes = new ArrayList<Shape>();
 
-		public Canvas(int maxsize) {
-			_pointStart = new LocationVector(0,0);
-			_pointEnd = new LocationVector(maxsize,maxsize);
-			_color = Color.WHITE;
-			_weight = -1;
-			_style = -1;
+		public Canvas(LocationVector _tempFirstCoord,
+				LocationVector _tempSecondCoord, Color theColor, int theWeight,
+				int theStyle) {
+			_pointStart = _tempFirstCoord;
+			_pointEnd = _tempSecondCoord;
+			_color = theColor;
+			_weight = theWeight;
+			_style = theStyle;
 		}
 
 		@Override
@@ -85,15 +87,6 @@ public class Canvas extends Shape {
 		public void addToShapeList(Shape x){
 			_shapes.add(x);
 		}
-
-		@Override
-		public void draw() {
-			System.out.println("DRAW (via canvas)");
-			for (int i = 0; i < _shapes.size(); i++){
-				
-				_shapes.get(i).repaint();
-			}
-		}
 		
 		
 		public void paintComponent(Graphics g) {
@@ -104,11 +97,9 @@ public class Canvas extends Shape {
 				shapeInstance.setOpaque(false);
 				shapeInstance.setVisible(true);
 				shapeInstance.setSize(100, 100);
-				//shapeInstance.setLocation(shapeInstance.getPointStart().get_x(), shapeInstance.getPointStart().get_y());
-				System.out.println(shapeInstance.getPointStart());
-				//shapeInstance.setSize(shapeInstance.getPointEnd().get_x()-shapeInstance.getPointStart().get_x(), shapeInstance.getPointEnd().get_y()-shapeInstance.getPointStart().get_y());
+				shapeInstance.setLocation(shapeInstance.getPointStart().get_x(), shapeInstance.getPointStart().get_y());
+				shapeInstance.setSize(shapeInstance.getPointEnd().get_x()-shapeInstance.getPointStart().get_x(), shapeInstance.getPointEnd().get_y()-shapeInstance.getPointStart().get_y());
 				this.add(shapeInstance);
-				_shapes.get(i).repaint();
 				System.out.println(i);
 			}
 	    }

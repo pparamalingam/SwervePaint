@@ -31,5 +31,4 @@ public abstract class Shape extends JPanel{
 	public abstract void setStyle(int x);
 	
 	public abstract boolean resize(LocationVector start, LocationVector end);
-	public abstract void draw();
 }

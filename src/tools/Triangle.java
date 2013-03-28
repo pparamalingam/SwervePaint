@@ -81,11 +81,6 @@ public class Triangle extends Shape {
 		return false;
 	}
 
-	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
-		
-	}
 
 		
 }

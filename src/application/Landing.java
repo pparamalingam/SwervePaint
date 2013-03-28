@@ -48,7 +48,7 @@ public class Landing extends JFrame {
 	public static final int MAXSIZE = 500;
 	
 	private MyWindow _myWindow;		//JFRAME - For singleton pattern
-	private Canvas _bigCanvas = new Canvas(MAXSIZE);		//The original canvas that holds everything else
+	private Canvas _bigCanvas = new Canvas(new LocationVector(0,0), new LocationVector(MAXSIZE, MAXSIZE), Color.WHITE, -1, -1);		//The original canvas that holds everything else
 	
 	private LocationVector _tempFirstCoord;
 	private LocationVector _tempSecondCoord;

@@ -1,8 +1,10 @@
 package tools;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 
@@ -23,61 +25,56 @@ public class Circle extends Shape {
 	@Override
 	public LocationVector getPointStart() {
 		// TODO Auto-generated method stub
-		return null;
+		return _pointStart;
 	}
 
 	@Override
 	public LocationVector getPointEnd() {
 		// TODO Auto-generated method stub
-		return null;
+		return _pointEnd;
 	}
 
 	@Override
 	public Color getColor() {
 		// TODO Auto-generated method stub
-		return null;
+		return _color;
 	}
 
 	@Override
 	public int getWeight() {
 		// TODO Auto-generated method stub
-		return 0;
+		return _weight;
 	}
 
 	@Override
 	public int getStyle() {
 		// TODO Auto-generated method stub
-		return 0;
+		return _style;
 	}
 
 	@Override
 	public void setPointStart(LocationVector x) {
-		// TODO Auto-generated method stub
-		
+		_pointStart = x;		
 	}
 
 	@Override
 	public void setPointEnd(LocationVector x) {
-		// TODO Auto-generated method stub
-		
+		_pointEnd = x;
 	}
 
 	@Override
 	public void setColor(Color x) {
-		// TODO Auto-generated method stub
-		
+		_color = x;
 	}
 
 	@Override
 	public void setWeight(int x) {
-		// TODO Auto-generated method stub
-		
+		_weight = x;
 	}
 
 	@Override
 	public void setStyle(int x) {
-		// TODO Auto-generated method stub
-		
+		_style = x;
 	}
 
 	@Override
@@ -85,12 +82,6 @@ public class Circle extends Shape {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	/*@Override
-	public void draw(Graphics g) {
-		((Graphics2D) g).draw(new Ellipse2D.Double(_pointStart.get_x(), _pointStart.get_y(), _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y()));
-	}*/
-
 	
 	@Override
     public void paintComponent(Graphics g) {
@@ -99,17 +90,14 @@ public class Circle extends Shape {
 
 	     g2.setColor(this._color);
 	     Ellipse2D.Float sign1 = new Ellipse2D.Float(0, 0, this.getWidth(), this.getHeight()); 
-	     g2.fill(sign1); 
+	     
+	     if (_style == 0){	//dashed
+	    	 float f1[] = {12.0f};
+	    	 g2.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 12.0f, f1, 0.0f));
+	     }
+	     
+	     g2.draw(sign1); 
     }
-	
-	@Override
-	public void draw() {
-		/*this.updateUI();
-		i = new BufferedImage(_pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y(), BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = this.i.createGraphics();
-		g.drawLine(0, 0, 100, 100);
-		System.out.println("DRAW (via circle)");*/
-	}
 
 
 }

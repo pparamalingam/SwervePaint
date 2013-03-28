@@ -80,11 +80,6 @@ public class Rectangle extends Shape {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
-		
-	}
 
 		
 }
