@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
 public class Triangle extends Shape {
@@ -85,8 +86,15 @@ public class Triangle extends Shape {
 	     Graphics2D g2 = (Graphics2D) g; 
 
 	     g2.setColor(this._color);
-	     Rectangle2D.Float sign1 = new Rectangle2D.Float(5, 5, _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y()); 
 	     
+	     Line2D.Float l1 = new Line2D.Float(0, 0, _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y());
+	     Line2D.Float l2 = new Line2D.Float(0, 0, 0, _pointEnd.get_y());
+	     Line2D.Float l3 = new Line2D.Float(0, _pointEnd.get_y()-30, _pointEnd.get_x(), _pointEnd.get_y()-30);
+	     
+/*	     Line2D.Float l1 = new Line2D.Float(0, 0, _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y());
+	     Line2D.Float l2 = new Line2D.Float(0, 0, 0, _pointEnd.get_y());
+	     Line2D.Float l3 = new Line2D.Float(0, _pointEnd.get_y()-30, _pointEnd.get_x(), _pointEnd.get_y()-30);*/
+
 	     if (_style == 0){	//dashed
 	    	 float f1[] = {12.0f};
 	    	 g2.setStroke(new BasicStroke((float)_weight, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 12.0f, f1, 0.0f));
@@ -95,7 +103,9 @@ public class Triangle extends Shape {
 	    	 g2.setStroke(new BasicStroke((float)_weight, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 	     }
 	     
-	     g2.draw(sign1); 
+	     g2.draw(l1);
+	     g2.draw(l2);
+	     g2.draw(l3);
     }
 
 
