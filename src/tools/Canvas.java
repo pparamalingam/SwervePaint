@@ -101,7 +101,7 @@ public class Canvas extends Shape {
 			System.out.println("DRAW (via canvas paintcomponent)");
 			for (int i = 0; i < _shapes.size(); i++){
 				Shape shapeInstance = _shapes.get(i);
-				shapeInstance.setBackground(Color.WHITE);
+				shapeInstance.setOpaque(false);
 				shapeInstance.setVisible(true);
 				shapeInstance.setSize(100, 100);
 				//shapeInstance.setLocation(shapeInstance.getPointStart().get_x(), shapeInstance.getPointStart().get_y());
