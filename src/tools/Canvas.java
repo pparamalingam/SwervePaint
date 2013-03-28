@@ -86,17 +86,31 @@ public class Canvas extends Shape {
 			_shapes.add(x);
 		}
 
-		/*@Override
-		public void draw(Graphics g) {
-			
-		}*/
-
 		@Override
 		public void draw() {
+			System.out.println("DRAW (via canvas)");
 			for (int i = 0; i < _shapes.size(); i++){
-				_shapes.get(i).draw();
-				System.out.println("DRAW (via canvas)");
+				
+				_shapes.get(i).repaint();
 			}
 		}
+		
+		
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			System.out.println("DRAW (via canvas paintcomponent)");
+			for (int i = 0; i < _shapes.size(); i++){
+				Shape shapeInstance = _shapes.get(i);
+				shapeInstance.setBackground(Color.WHITE);
+				shapeInstance.setVisible(true);
+				shapeInstance.setSize(100, 100);
+				//shapeInstance.setLocation(shapeInstance.getPointStart().get_x(), shapeInstance.getPointStart().get_y());
+				System.out.println(shapeInstance.getPointStart());
+				//shapeInstance.setSize(shapeInstance.getPointEnd().get_x()-shapeInstance.getPointStart().get_x(), shapeInstance.getPointEnd().get_y()-shapeInstance.getPointStart().get_y());
+				this.add(shapeInstance);
+				_shapes.get(i).repaint();
+				System.out.println(i);
+			}
+	    }
 
 }

@@ -94,20 +94,22 @@ public class Circle extends Shape {
 	
 	@Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        _bufImage = (BufferedImage)this.createImage(_pointStart.get_x(), _pointStart.get_y(), _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y());
-        
-        Graphics2D g2 = _bufImage.createGraphics();
-        g2.draw(new Ellipse2D.Double(_pointStart.get_x(), _pointStart.get_y(), _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y()));
-        g2.drawImage(_bufImage, null, 0, 0);
+		super.paintComponent(g); 
+	     Graphics2D g2 = (Graphics2D) g; 
+
+	     g2.setColor(this._color);
+	     Ellipse2D.Float sign1 = new Ellipse2D.Float(0, 0, this.getWidth(), this.getHeight()); 
+	     g2.fill(sign1); 
     }
 	
 	@Override
 	public void draw() {
-		this.updateUI();
-		/*i = new BufferedImage(_pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y(), BufferedImage.TYPE_INT_ARGB);
+		/*this.updateUI();
+		i = new BufferedImage(_pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = this.i.createGraphics();
-		g.drawLine(0, 0, 100, 100);*/
-		System.out.println("DRAW (via circle)");
+		g.drawLine(0, 0, 100, 100);
+		System.out.println("DRAW (via circle)");*/
 	}
+
+
 }

@@ -49,7 +49,6 @@ public class Landing extends JFrame {
 	
 	private MyWindow _myWindow;		//JFRAME - For singleton pattern
 	private Canvas _bigCanvas = new Canvas(MAXSIZE);		//The original canvas that holds everything else
-	private JPanel panel_1;	//This is the actual canvas
 	
 	private LocationVector _tempFirstCoord;
 	private LocationVector _tempSecondCoord;
@@ -187,8 +186,7 @@ public class Landing extends JFrame {
 		_myWindow.setLayout(new BorderLayout(0, 0));
 		setContentPane(_myWindow);
 		
-		panel_1 = new JPanel();
-		panel_1.addMouseListener(new MouseAdapter() {
+		_bigCanvas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				System.out.println("Pressed: " + e.getX() + ", " + e.getY());
@@ -246,21 +244,20 @@ public class Landing extends JFrame {
 				}
 				else if (tglbtnCircle.isSelected()){
 					Circle shape = new Circle(_tempFirstCoord, _tempSecondCoord, theColor, theWeight, theStyle);
+					System.out.println(shape);
 					_bigCanvas.addToShapeList(shape);
 				}
-				
-				_bigCanvas.draw();
+
+				_bigCanvas.updateUI();
 				
 
 				System.out.println("Make a shape at: " + _tempFirstCoord + " and " + _tempSecondCoord);
-				
 			}
 		});
 		
-		panel_1.setBackground(Color.WHITE);
-		panel_1.setPreferredSize(new Dimension(MAXSIZE,MAXSIZE));
-		panel_1.setVisible(true);
-		_myWindow.add(panel_1, BorderLayout.WEST);
+		_bigCanvas.setBackground(Color.WHITE);
+		_bigCanvas.setPreferredSize(new Dimension(MAXSIZE,MAXSIZE));
+		_myWindow.add(_bigCanvas, BorderLayout.WEST);
 		
 		
 		//Shapes
