@@ -1,7 +1,11 @@
 package tools;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 
 public class Line extends Shape {
 
@@ -18,61 +22,56 @@ public class Line extends Shape {
 	@Override
 	public LocationVector getPointStart() {
 		// TODO Auto-generated method stub
-		return null;
+		return _pointStart;
 	}
 
 	@Override
 	public LocationVector getPointEnd() {
 		// TODO Auto-generated method stub
-		return null;
+		return _pointEnd;
 	}
 
 	@Override
 	public Color getColor() {
 		// TODO Auto-generated method stub
-		return null;
+		return _color;
 	}
 
 	@Override
 	public int getWeight() {
 		// TODO Auto-generated method stub
-		return 0;
+		return _weight;
 	}
 
 	@Override
 	public int getStyle() {
 		// TODO Auto-generated method stub
-		return 0;
+		return _style;
 	}
 
 	@Override
 	public void setPointStart(LocationVector x) {
-		// TODO Auto-generated method stub
-		
+		_pointStart = x;		
 	}
 
 	@Override
 	public void setPointEnd(LocationVector x) {
-		// TODO Auto-generated method stub
-		
+		_pointEnd = x;
 	}
 
 	@Override
 	public void setColor(Color x) {
-		// TODO Auto-generated method stub
-		
+		_color = x;
 	}
 
 	@Override
 	public void setWeight(int x) {
-		// TODO Auto-generated method stub
-		
+		_weight = x;
 	}
 
 	@Override
 	public void setStyle(int x) {
-		// TODO Auto-generated method stub
-		
+		_style = x;
 	}
 
 	@Override
@@ -81,7 +80,23 @@ public class Line extends Shape {
 		return false;
 	}
 
+	@Override
+    public void paintComponent(Graphics g) {
+		super.paintComponent(g); 
+	     Graphics2D g2 = (Graphics2D) g; 
 
-
+	     g2.setColor(this._color);
+	     Line2D.Float sign1 = new Line2D.Float(5, 5, _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y()); 
+	     
+	     if (_style == 0){	//dashed
+	    	 float f1[] = {12.0f};
+	    	 g2.setStroke(new BasicStroke((float)_weight, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 12.0f, f1, 0.0f));
+	     }
+	     else{
+	    	 g2.setStroke(new BasicStroke((float)_weight, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+	     }
+	     
+	     g2.draw(sign1); 
+    }
 		
 }

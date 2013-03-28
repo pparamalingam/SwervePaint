@@ -89,11 +89,14 @@ public class Circle extends Shape {
 	     Graphics2D g2 = (Graphics2D) g; 
 
 	     g2.setColor(this._color);
-	     Ellipse2D.Float sign1 = new Ellipse2D.Float(0, 0, this.getWidth(), this.getHeight()); 
+	     Ellipse2D.Float sign1 = new Ellipse2D.Float(5, 5, _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y()); 
 	     
 	     if (_style == 0){	//dashed
 	    	 float f1[] = {12.0f};
-	    	 g2.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 12.0f, f1, 0.0f));
+	    	 g2.setStroke(new BasicStroke((float)_weight, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 12.0f, f1, 0.0f));
+	     }
+	     else{
+	    	 g2.setStroke(new BasicStroke((float)_weight, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 	     }
 	     
 	     g2.draw(sign1); 

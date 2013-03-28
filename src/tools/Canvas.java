@@ -21,61 +21,56 @@ public class Canvas extends Shape {
 		@Override
 		public LocationVector getPointStart() {
 			// TODO Auto-generated method stub
-			return null;
+			return _pointStart;
 		}
 
 		@Override
 		public LocationVector getPointEnd() {
 			// TODO Auto-generated method stub
-			return null;
+			return _pointEnd;
 		}
 
 		@Override
 		public Color getColor() {
 			// TODO Auto-generated method stub
-			return null;
+			return _color;
 		}
 
 		@Override
 		public int getWeight() {
 			// TODO Auto-generated method stub
-			return 0;
+			return _weight;
 		}
 
 		@Override
 		public int getStyle() {
 			// TODO Auto-generated method stub
-			return 0;
+			return _style;
 		}
 
 		@Override
 		public void setPointStart(LocationVector x) {
-			// TODO Auto-generated method stub
-			
+			_pointStart = x;		
 		}
 
 		@Override
 		public void setPointEnd(LocationVector x) {
-			// TODO Auto-generated method stub
-			
+			_pointEnd = x;
 		}
 
 		@Override
 		public void setColor(Color x) {
-			// TODO Auto-generated method stub
-			
+			_color = x;
 		}
 
 		@Override
 		public void setWeight(int x) {
-			// TODO Auto-generated method stub
-			
+			_weight = x;
 		}
 
 		@Override
 		public void setStyle(int x) {
-			// TODO Auto-generated method stub
-			
+			_style = x;
 		}
 
 		@Override
@@ -96,9 +91,8 @@ public class Canvas extends Shape {
 				Shape shapeInstance = _shapes.get(i);
 				shapeInstance.setOpaque(false);
 				shapeInstance.setVisible(true);
-				shapeInstance.setSize(100, 100);
 				shapeInstance.setLocation(shapeInstance.getPointStart().get_x(), shapeInstance.getPointStart().get_y());
-				shapeInstance.setSize(shapeInstance.getPointEnd().get_x()-shapeInstance.getPointStart().get_x(), shapeInstance.getPointEnd().get_y()-shapeInstance.getPointStart().get_y());
+				shapeInstance.setSize(shapeInstance.getPointEnd().get_x()-shapeInstance.getPointStart().get_x()+10, shapeInstance.getPointEnd().get_y()-shapeInstance.getPointStart().get_y()+10);
 				this.add(shapeInstance);
 				System.out.println(i);
 			}
