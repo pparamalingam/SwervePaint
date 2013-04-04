@@ -2,6 +2,7 @@ package tools;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseListener;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 
@@ -9,6 +10,7 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("unused")
 public abstract class Shape extends JPanel{
+	protected MouseListener _ml;
 	protected LocationVector _pointStart;
 	protected LocationVector _pointEnd;
 	protected Color _color;
@@ -22,6 +24,7 @@ public abstract class Shape extends JPanel{
 	public abstract Color getColor();
 	public abstract int getWeight();
 	public abstract int getStyle();
+	public abstract MouseListener getMl();
 	
 	//setters
 	public abstract void setPointStart(LocationVector x);
@@ -29,6 +32,9 @@ public abstract class Shape extends JPanel{
 	public abstract void setColor(Color x);
 	public abstract void setWeight(int x);
 	public abstract void setStyle(int x);
+	public abstract void setMl(MouseListener m);
 	
 	public abstract boolean resize(LocationVector start, LocationVector end);
+	public abstract void addML();
+	public abstract void moveThatShape(LocationVector s, LocationVector e);
 }

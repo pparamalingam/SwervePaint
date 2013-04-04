@@ -2,6 +2,9 @@ package tools;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,6 +86,18 @@ public class Canvas extends Shape {
 			_shapes.add(x);
 		}
 		
+		public void addShapeListeners(){
+			for (int i = 0; i < _shapes.size(); i++){
+				addMoveListener(_shapes.get(i));
+				System.out.println("swerve1");
+			}
+		}
+		
+		public void removeShapeListeners(){
+			for (int i = 0; i < _shapes.size(); i++){
+				removeMoveListener(_shapes.get(i));
+			}
+		}
 		
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
@@ -98,4 +113,34 @@ public class Canvas extends Shape {
 			}
 	    }
 
+		public void addMoveListener(Shape s) {
+			s.addML();
+		}
+
+		public void removeMoveListener(Shape s) {
+			s.removeMouseListener(s.getMl());
+		}
+
+		@Override
+		public MouseListener getMl() {
+			// gtfo
+			return null;
+		}
+
+		@Override
+		public void setMl(MouseListener m) {
+			//gtfo
+		}
+
+		@Override
+		public void addML() {
+			// gtfo
+			
+		}
+
+		@Override
+		public void moveThatShape(LocationVector s, LocationVector e) {
+			// gtfo
+			//will be used to move groups
+		}
 }

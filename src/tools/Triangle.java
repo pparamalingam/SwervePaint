@@ -4,10 +4,15 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
 public class Triangle extends Shape {
+	
+	private MouseListener _ml;
 	
 	public Triangle(LocationVector _tempFirstCoord,
 			LocationVector _tempSecondCoord, Color theColor, int theWeight,
@@ -89,7 +94,7 @@ public class Triangle extends Shape {
 	     
 	     Line2D.Float l1 = new Line2D.Float(0, 0, _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y());
 	     Line2D.Float l2 = new Line2D.Float(0, 0, 0, _pointEnd.get_y());
-	     Line2D.Float l3 = new Line2D.Float(0, _pointEnd.get_y()-30, _pointEnd.get_x(), _pointEnd.get_y()-30);
+	     Line2D.Float l3 = new Line2D.Float(0, _pointEnd.get_y()-_pointStart.get_y()+9, _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y());
 	     
 /*	     Line2D.Float l1 = new Line2D.Float(0, 0, _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y());
 	     Line2D.Float l2 = new Line2D.Float(0, 0, 0, _pointEnd.get_y());
@@ -108,6 +113,42 @@ public class Triangle extends Shape {
 	     g2.draw(l3);
     }
 
+	@Override
+	public MouseListener getMl() {
+		return _ml;
+	}
 
+	@Override
+	public void setMl(MouseListener m) {
+		_ml = m;
+	}
+	
+	@Override
+	public void addML() {
+		_ml = new MouseAdapter() {
+			private LocationVector nsl;
+			private LocationVector nel;
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				System.out.println("Pressed Shape: " + e.getX() + ", " + e.getY());
+				nsl = new LocationVector(e.getX(), e.getY());
+				
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				System.out.println("Released Shape: " + e.getX() + ", " + e.getY());
+				nel = new LocationVector(e.getX(), e.getY());
+				moveThatShape(nsl, nel);
+			}
+		};
+		this.addMouseListener(_ml);
+	}
+	
+	@Override
+	public void moveThatShape(LocationVector s, LocationVector e){
+		setPointStart(new LocationVector(_pointStart.get_x() +e.get_x(), _pointStart.get_y() + e.get_y()));
+		setPointEnd(new LocationVector(_pointEnd.get_x() + e.get_x(), _pointEnd.get_y() + e.get_y()));
+	}
 		
 }

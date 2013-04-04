@@ -4,11 +4,16 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 
 public class Line extends Shape {
 
+	private MouseListener _ml;
+	
 	public Line(LocationVector _tempFirstCoord,
 			LocationVector _tempSecondCoord, Color theColor, int theWeight,
 			int theStyle) {
@@ -98,5 +103,42 @@ public class Line extends Shape {
 	     
 	     g2.draw(sign1); 
     }
-		
+
+	@Override
+	public MouseListener getMl() {
+		return _ml;
+	}
+
+	@Override
+	public void setMl(MouseListener m) {
+		_ml = m;
+	}
+	
+	@Override
+	public void addML() {
+		_ml = new MouseAdapter() {
+			private LocationVector nsl;
+			private LocationVector nel;
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				System.out.println("Pressed Shape: " + e.getX() + ", " + e.getY());
+				nsl = new LocationVector(e.getX(), e.getY());
+				
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				System.out.println("Released Shape: " + e.getX() + ", " + e.getY());
+				nel = new LocationVector(e.getX(), e.getY());
+				moveThatShape(nsl, nel);
+			}
+		};
+		this.addMouseListener(_ml);
+	}
+	
+	@Override
+	public void moveThatShape(LocationVector s, LocationVector e){
+		setPointStart(new LocationVector(_pointStart.get_x() +e.get_x(), _pointStart.get_y() + e.get_y()));
+		setPointEnd(new LocationVector(_pointEnd.get_x() + e.get_x(), _pointEnd.get_y() + e.get_y()));
+	}
 }

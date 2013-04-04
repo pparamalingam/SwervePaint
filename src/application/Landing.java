@@ -41,8 +41,10 @@ import tools.Triangle;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.Font;
+import javax.swing.JSeparator;
 
 public class Landing extends JFrame {
 	public static final int MAXSIZE = 500;
@@ -71,6 +73,12 @@ public class Landing extends JFrame {
 	
 	//Weight Options
 	private JSlider slider = new JSlider();
+	
+	//Select/Move
+	private JToggleButton tglbtnResize = new JToggleButton("Resize");
+	private JToggleButton tglbtnMove = new JToggleButton("Move");
+	
+	private boolean mouseListenerHasBeenUsed = false; 
 	
 	/**
 	 * Launch the application.
@@ -182,9 +190,17 @@ public class Landing extends JFrame {
 		mnNewMenu.add(mntmAbout);
 		
 		_myWindow = new MyWindow();
+		_myWindow = _myWindow.getInstance();
 		_myWindow.setBorder(new EmptyBorder(5, 5, 5, 5));
 		_myWindow.setLayout(new BorderLayout(0, 0));
 		setContentPane(_myWindow);
+		
+		tglbtnMove.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				_bigCanvas.addShapeListeners();
+			}
+		});
 		
 		_bigCanvas.addMouseListener(new MouseAdapter() {
 			@Override
@@ -229,27 +245,41 @@ public class Landing extends JFrame {
 				//Check for Weight
 				theWeight = slider.getValue();
 				
+				_bigCanvas.removeShapeListeners();
+				
 				//Check for shape
 				if (tglbtnLine.isSelected()){
 					Line shape = new Line(_tempFirstCoord, _tempSecondCoord, theColor, theWeight, theStyle);
 					_bigCanvas.addToShapeList(shape);
 				}
 				else if (tglbtnRectangle.isSelected()){
+					_bigCanvas.removeShapeListeners();
 					Rectangle shape = new Rectangle(_tempFirstCoord, _tempSecondCoord, theColor, theWeight, theStyle);
 					_bigCanvas.addToShapeList(shape);
 				}
 				else if (tglbtnTriangle.isSelected()){
+					_bigCanvas.removeShapeListeners();
 					Triangle shape = new Triangle(_tempFirstCoord, _tempSecondCoord, theColor, theWeight, theStyle);
 					_bigCanvas.addToShapeList(shape);
 				}
 				else if (tglbtnCircle.isSelected()){
+					_bigCanvas.removeShapeListeners();
 					Circle shape = new Circle(_tempFirstCoord, _tempSecondCoord, theColor, theWeight, theStyle);
 					System.out.println(shape);
 					_bigCanvas.addToShapeList(shape);
 				}
-
-				_bigCanvas.updateUI();
+				/*else if (tglbtnMove.isSelected()){
+					mouseListenerHasBeenUsed = true;
+					System.out.println("move is selected");
+					_bigCanvas.addShapeListeners();
+				}*/
+				else if (tglbtnResize.isSelected()){
+					_bigCanvas.removeShapeListeners();
+					System.out.println("resize is selected");
+				}
 				
+
+				_myWindow.updateUI();
 
 				System.out.println("Make a shape at: " + _tempFirstCoord + " and " + _tempSecondCoord);
 			}
@@ -260,6 +290,11 @@ public class Landing extends JFrame {
 		_myWindow.add(_bigCanvas, BorderLayout.WEST);
 		
 		
+		JSeparator separator = new JSeparator();
+		separator.setOrientation(SwingConstants.VERTICAL);
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setOrientation(SwingConstants.VERTICAL);
+		
 		//Shapes
 		JToolBar toolBar = new JToolBar();
 		_myWindow.add(toolBar, BorderLayout.NORTH);
@@ -268,11 +303,18 @@ public class Landing extends JFrame {
 		toolBar.add(tglbtnRectangle);
 		toolBar.add(tglbtnCircle);
 		toolBar.add(tglbtnTriangle);
+		toolBar.add(separator);
+		toolBar.add(tglbtnResize);
+		toolBar.add(tglbtnMove);
+		toolBar.add(separator_1);
 		ButtonGroup g3 = new ButtonGroup();
 		g3.add(tglbtnLine);
 		g3.add(tglbtnRectangle);
 		g3.add(tglbtnCircle);
 		g3.add(tglbtnTriangle);
+		g3.add(tglbtnResize);
+		g3.add(tglbtnMove);
+	
 		
 		slider.setFont(new Font("Tahoma", Font.PLAIN, 6));
 		slider.setPaintLabels(true);
