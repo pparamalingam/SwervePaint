@@ -25,6 +25,7 @@ public abstract class Shape extends JPanel{
 	public abstract int getWeight();
 	public abstract int getStyle();
 	public abstract MouseListener getMl();
+	public abstract boolean isSelected();
 	
 	//setters
 	public abstract void setPointStart(LocationVector x);

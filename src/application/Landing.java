@@ -2,6 +2,7 @@ package application;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
@@ -68,6 +69,10 @@ public class Landing extends JFrame {
 	private JToggleButton tglbtnMove = new JToggleButton("Move");
 	private JToggleButton tglbtnSelect = new JToggleButton("Select"); 
 	
+	//Undo and Redo Buttons
+	JMenuItem mntmUndo = new JMenuItem("Undo");
+	JMenuItem mntmRedo = new JMenuItem("Redo");
+	
 	/**
 	 * Launch the application.
 	 */
@@ -117,10 +122,8 @@ public class Landing extends JFrame {
 		JMenu mnEdit = new JMenu("Edit");
 		menuBar.add(mnEdit);
 		
-		JMenuItem mntmUndo = new JMenuItem("Undo");
-		mnEdit.add(mntmUndo);
 		
-		JMenuItem mntmRedo = new JMenuItem("Redo");
+		mnEdit.add(mntmUndo);
 		mnEdit.add(mntmRedo);
 		
 		mnEdit.addSeparator();
@@ -187,11 +190,27 @@ public class Landing extends JFrame {
 			}
 		});
 		
+		rdbtnmntmSolid.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				_bigCanvas.setStyle(1);
+			}
+		});
+		
+		rdbtnmntmDashed.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				_bigCanvas.setStyle(0);
+			}
+		});
+		
 		_myWindow = new MyWindow();
 		_myWindow = _myWindow.getInstance();
 		_myWindow.setBorder(new EmptyBorder(5, 5, 5, 5));
 		_myWindow.setLayout(new BorderLayout(0, 0));
 		setContentPane(_myWindow);
+		
+		updateRedoAndUndoButtons(true, true);
 		
 		mntmUndo.addMouseListener(new MouseAdapter() {
 			@Override
@@ -206,6 +225,14 @@ public class Landing extends JFrame {
 			public void mousePressed(MouseEvent e) {
 				Invoker invoker = new Invoker();
 				invoker.getInstance().redoLast();
+			}
+		});
+		
+		rdbtnmntmBlack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				//Invoker invoker = new Invoker();
+				//invoker.getInstance().redoLast();
 			}
 		});
 		
@@ -375,4 +402,9 @@ public class Landing extends JFrame {
 		toolBar.add(slider);
 	}
 
+	public void updateRedoAndUndoButtons(boolean redo, boolean undo){
+		System.out.println("LOL: " + redo + " " + undo);
+		mntmRedo.setEnabled(redo);
+		mntmUndo.setEnabled(undo);
+	}
 }

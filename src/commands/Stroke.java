@@ -1,32 +1,37 @@
 package commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import tools.Shape;
 
 public class Stroke implements Command {
 
-	Shape _s;
-	int _oldStyle;
-	int _newStyle;
+	List<Shape> _s = new ArrayList<Shape>();
+	List<Integer> _oldS = new ArrayList<Integer>();
+	int _solid;
 	
-	public Stroke(Shape s, Boolean solid){
+	public Stroke(List<Shape> s, int solid){
 		_s = s;
-		if (solid){
-			_newStyle = 1;	//solid
+		_solid = solid;
+		for (int i = 0; i < _s.size(); i++){
+			_oldS.add(_s.get(i).getStyle());
 		}
-		else {
-			_newStyle = 0;	//dashed
-		}
-		_oldStyle = s.getStyle();
 	}
 	
 	@Override
 	public void execute() {
-		_s.setStyle(_newStyle);
+		for (int i = 0; i < _s.size(); i++){
+			_s.get(i).setStyle(_solid);
+		}
 	}
 
 	@Override
 	public void unexecute() {
-		_s.setStyle(_oldStyle);
+		for (int i = 0; i < _s.size(); i++){
+			System.out.println("OLD INT TO GO BACK TO " + _oldS.get(i));
+			_s.get(i).setStyle(_oldS.get(i));
+		}
 	}
 
 }

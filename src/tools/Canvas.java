@@ -6,6 +6,12 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.MyWindow;
+
+import commands.Invoker;
+import commands.Move;
+import commands.Stroke;
+
 @SuppressWarnings("serial")
 public class Canvas extends Shape {
 		private List<Shape> _shapes = new ArrayList<Shape>();
@@ -73,7 +79,20 @@ public class Canvas extends Shape {
 
 		@Override
 		public void setStyle(int x) {
-			_style = x;
+			List<Shape> _temp = new ArrayList<Shape>();
+			System.out.println("Called Set Style " + x);
+			for (int i = 0; i < _shapes.size(); i++){
+				System.out.println("FOUND A SHAPE");
+				if (_shapes.get(i).isSelected()){
+					System.out.println("FOUND A SELECTED SHAPE");
+					_temp.add(_shapes.get(i));
+				}
+			}
+			Invoker invoker = new Invoker();
+			Stroke cmd = new Stroke(_temp, x);
+			invoker.getInstance().storeAndExecute(cmd);
+			MyWindow mywindow = new MyWindow();
+			mywindow.getInstance().updateUI();
 		}
 
 		@Override
@@ -102,7 +121,6 @@ public class Canvas extends Shape {
 		
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			//System.out.println("DRAW (via canvas paintcomponent)");
 			// print in reverse order to give priority to newly created shapes
 			for (int i = (_shapes.size() - 1); i >= 0; i--){
 				Shape shapeInstance = _shapes.get(i);
@@ -164,5 +182,9 @@ public class Canvas extends Shape {
 		public void unselect() {
 			_selected = false;
 			
+		}
+		@Override
+		public boolean isSelected() {
+			return _selected;
 		}
 }

@@ -230,4 +230,9 @@ public class Rectangle extends Shape {
 		
 	}
 
+	@Override
+	public boolean isSelected() {
+		return _selected;
+	}
+
 }

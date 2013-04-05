@@ -221,4 +221,9 @@ public class Circle extends Shape {
 		_selected = false;
 		
 	}
+
+	@Override
+	public boolean isSelected() {
+		return _selected;
+	}
 }

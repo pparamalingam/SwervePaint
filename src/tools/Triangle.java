@@ -230,4 +230,8 @@ public class Triangle extends Shape {
 		
 	}
 		
+	@Override
+	public boolean isSelected() {
+		return _selected;
+	}
 }
