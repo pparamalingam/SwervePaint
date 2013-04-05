@@ -100,23 +100,25 @@ public class Canvas extends Shape {
 		
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			System.out.println("DRAW (via canvas paintcomponent)");
-			for (int i = 0; i < _shapes.size(); i++){
+			//System.out.println("DRAW (via canvas paintcomponent)");
+			// print in reverse order to give priority to newly created shapes
+			for (int i = (_shapes.size() - 1); i >= 0; i--){
 				Shape shapeInstance = _shapes.get(i);
 				shapeInstance.setOpaque(false);
 				shapeInstance.setVisible(true);
 				shapeInstance.setLocation(shapeInstance.getPointStart().get_x(), shapeInstance.getPointStart().get_y());
 				shapeInstance.setSize(shapeInstance.getPointEnd().get_x()-shapeInstance.getPointStart().get_x()+10, shapeInstance.getPointEnd().get_y()-shapeInstance.getPointStart().get_y()+10);
 				this.add(shapeInstance);
-				System.out.println(i);
 			}
 	    }
 
 		public void addMoveListener(Shape s, int type) {
+			System.out.println("ADD INDIVIDUAL SHAPE LISTENER" + type);
 			s.addML(type);
 		}
 
 		public void removeMoveListener(Shape s) {
+			System.out.println("KILL INDIVIDUAL SHAPE LISTENERS");
 			s.removeMouseListener(s.getMl());
 		}
 
@@ -147,6 +149,12 @@ public class Canvas extends Shape {
 		public void resizeThatShape(LocationVector s, LocationVector e) {
 			// gtfo
 			// will be used to resize groups
+			
+		}
+
+		@Override
+		public void selectThatShape() {
+			// TODO Auto-generated method stub
 			
 		}
 }

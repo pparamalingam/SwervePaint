@@ -33,7 +33,7 @@ import javax.swing.JSeparator;
 
 @SuppressWarnings("serial")
 public class Landing extends JFrame {
-	public static final int MAXSIZE = 500;
+	public int MAXSIZE = Global.MAXSIZE;
 	
 	private MyWindow _myWindow;		//JFRAME - For singleton pattern
 	private Canvas _bigCanvas = new Canvas(new LocationVector(0,0), new LocationVector(MAXSIZE, MAXSIZE), Color.WHITE, -1, -1);		//The original canvas that holds everything else
@@ -62,7 +62,8 @@ public class Landing extends JFrame {
 	
 	//Select/Move
 	private JToggleButton tglbtnResize = new JToggleButton("Resize");
-	private JToggleButton tglbtnMove = new JToggleButton("Move"); 
+	private JToggleButton tglbtnMove = new JToggleButton("Move");
+	private JToggleButton tglbtnSelect = new JToggleButton("Select"); 
 	
 	/**
 	 * Launch the application.
@@ -182,19 +183,54 @@ public class Landing extends JFrame {
 		
 		tglbtnMove.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				_bigCanvas.removeShapeListeners();
-				_bigCanvas.addShapeListeners(1);
+				_bigCanvas.addShapeListeners(1);	//Enable move listeners
 			}
 		});
 		
 		tglbtnResize.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				_bigCanvas.removeShapeListeners();
-				_bigCanvas.addShapeListeners(2);
+				_bigCanvas.addShapeListeners(2);	//Enable resize listeners
 			}
 		});
+		
+		tglbtnSelect.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				_bigCanvas.removeShapeListeners();
+				_bigCanvas.addShapeListeners(3);	//Enable Select listeners
+			}
+		});
+		
+		tglbtnRectangle.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				_bigCanvas.removeShapeListeners();
+			}
+		});
+		tglbtnLine.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				_bigCanvas.removeShapeListeners();
+			}
+		});
+		tglbtnTriangle.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				_bigCanvas.removeShapeListeners();
+			}
+		});
+		tglbtnCircle.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				_bigCanvas.removeShapeListeners();
+			}
+		});
+		
+		
 		
 		_bigCanvas.addMouseListener(new MouseAdapter() {
 			@Override
@@ -239,38 +275,29 @@ public class Landing extends JFrame {
 				//Check for Weight
 				theWeight = slider.getValue();
 				
-				_bigCanvas.removeShapeListeners();
-				
 				//Check for shape
 				if (tglbtnLine.isSelected()){
 					Line shape = new Line(_tempFirstCoord, _tempSecondCoord, theColor, theWeight, theStyle);
 					_bigCanvas.addToShapeList(shape);
+					System.out.println("Make a Line at: " + _tempFirstCoord + " and " + _tempSecondCoord);
 				}
 				else if (tglbtnRectangle.isSelected()){
-					_bigCanvas.removeShapeListeners();
 					Rectangle shape = new Rectangle(_tempFirstCoord, _tempSecondCoord, theColor, theWeight, theStyle);
 					_bigCanvas.addToShapeList(shape);
+					System.out.println("Make a Rectangle at: " + _tempFirstCoord + " and " + _tempSecondCoord);
 				}
 				else if (tglbtnTriangle.isSelected()){
-					_bigCanvas.removeShapeListeners();
 					Triangle shape = new Triangle(_tempFirstCoord, _tempSecondCoord, theColor, theWeight, theStyle);
 					_bigCanvas.addToShapeList(shape);
+					System.out.println("Make a triangle at: " + _tempFirstCoord + " and " + _tempSecondCoord);
 				}
 				else if (tglbtnCircle.isSelected()){
-					_bigCanvas.removeShapeListeners();
 					Circle shape = new Circle(_tempFirstCoord, _tempSecondCoord, theColor, theWeight, theStyle);
-					System.out.println(shape);
 					_bigCanvas.addToShapeList(shape);
+					System.out.println("Make a Circle at: " + _tempFirstCoord + " and " + _tempSecondCoord);
 				}
-				else if (tglbtnResize.isSelected()){
-					_bigCanvas.removeShapeListeners();
-					System.out.println("resize is selected");
-				}
-				
 
 				_myWindow.updateUI();
-
-				System.out.println("Make a shape at: " + _tempFirstCoord + " and " + _tempSecondCoord);
 			}
 		});
 		
@@ -295,6 +322,7 @@ public class Landing extends JFrame {
 		toolBar.add(separator);
 		toolBar.add(tglbtnResize);
 		toolBar.add(tglbtnMove);
+		toolBar.add(tglbtnSelect);
 		toolBar.add(separator_1);
 		ButtonGroup g3 = new ButtonGroup();
 		g3.add(tglbtnLine);
@@ -303,6 +331,7 @@ public class Landing extends JFrame {
 		g3.add(tglbtnTriangle);
 		g3.add(tglbtnResize);
 		g3.add(tglbtnMove);
+		g3.add(tglbtnSelect);
 	
 		
 		slider.setFont(new Font("Tahoma", Font.PLAIN, 6));

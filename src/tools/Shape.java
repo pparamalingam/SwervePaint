@@ -16,7 +16,7 @@ public abstract class Shape extends JPanel{
 	protected Color _color;
 	protected int _weight;	//1-10
 	protected int _style;	//1==Solid, 2==Dashed
-	protected BufferedImage _bufImage = null;
+	private Boolean _selected = false;
 	
 	//getters
 	public abstract LocationVector getPointStart();
@@ -38,4 +38,5 @@ public abstract class Shape extends JPanel{
 	public abstract void addML(int x);
 	public abstract void moveThatShape(LocationVector s, LocationVector e);
 	public abstract void resizeThatShape(LocationVector s, LocationVector e);
+	public abstract void selectThatShape();
 }

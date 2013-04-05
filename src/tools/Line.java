@@ -9,12 +9,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
 
+import javax.swing.BorderFactory;
+
+import application.Global;
 import application.MyWindow;
 
 @SuppressWarnings("serial")
 public class Line extends Shape {
 
 	private MouseListener _ml;
+	private Boolean _selected = false;
 	
 	public Line(LocationVector _tempFirstCoord,
 			LocationVector _tempSecondCoord, Color theColor, int theWeight,
@@ -125,14 +129,14 @@ public class Line extends Shape {
 				
 				@Override
 				public void mousePressed(MouseEvent e) {
-					System.out.println("Pressed Rectangle: " + e.getX() + ", " + e.getY());
+					System.out.println("Pressed Line: " + e.getX() + ", " + e.getY());
 					nsl = new LocationVector(e.getX(), e.getY());
 					
 				}
 				@SuppressWarnings("static-access")
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					System.out.println("Released Rectangle: " + e.getX() + ", " + e.getY());
+					System.out.println("Released Line: " + e.getX() + ", " + e.getY());
 					nel = new LocationVector(e.getX(), e.getY());
 					moveThatShape(nsl, nel);
 					MyWindow x = new MyWindow();
@@ -166,17 +170,49 @@ public class Line extends Shape {
 				}
 			};
 		}
+		else if (x == 3){	// Selected
+			_ml = new MouseAdapter() {				
+				@SuppressWarnings("static-access")
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					selectThatShape();
+					MyWindow x = new MyWindow();
+					x.getInstance().updateUI();
+					x.getInstance().getWidth();
+				}
+			};
+		}
+		System.out.println("THE MOUSE LISTENER HAS BEEN SET FOR " + x);
 		this.addMouseListener(_ml);
 	}
 	
 	@Override
 	public void moveThatShape(LocationVector s, LocationVector e){
-		setPointStart(new LocationVector(_pointStart.get_x() +e.get_x(), _pointStart.get_y() + e.get_y()));
-		setPointEnd(new LocationVector(_pointEnd.get_x() + e.get_x(), _pointEnd.get_y() + e.get_y()));
+		LocationVector newStarter	= new LocationVector(_pointStart.get_x() + e.get_x() - ((_pointEnd.get_x() - _pointStart.get_x()) / 2), _pointStart.get_y() + e.get_y() - ((_pointEnd.get_y() - _pointStart.get_y()) / 2));
+		LocationVector newEnder		= new LocationVector(_pointEnd.get_x() + e.get_x() -  ((_pointEnd.get_x() - _pointStart.get_x()) / 2), _pointEnd.get_y() + e.get_y() - ((_pointEnd.get_y() - _pointStart.get_y()) / 2)); 
+		if (newStarter.get_x() > 0 && newStarter.get_y() >0 && newStarter.get_x() < Global.MAXSIZE && newStarter.get_y() < Global.MAXSIZE &&
+				newEnder.get_x() > 0 && newEnder.get_y() >0 && newEnder.get_x() < Global.MAXSIZE && newEnder.get_y() < Global.MAXSIZE){
+			setPointStart(newStarter);
+			setPointEnd(newEnder);
+		}
 	}
 
 	@Override
 	public void resizeThatShape(LocationVector s, LocationVector e) {
-		setPointEnd(new LocationVector(_pointStart.get_x() +e.get_x(), _pointStart.get_y() + e.get_y()));
+		if (e.get_x() > 0 && e.get_y() >0 && e.get_x() < Global.MAXSIZE && e.get_y() < Global.MAXSIZE){
+			setPointEnd(new LocationVector(_pointStart.get_x() +e.get_x(), _pointStart.get_y() + e.get_y()));
+		}
+	}
+	
+	@Override
+	public void selectThatShape(){
+		if (!_selected){
+			_selected = true;
+			this.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GRAY));
+		}
+		else { //(_selected)
+			_selected = false;
+			setBorder(null);
+		}
 	}
 }
