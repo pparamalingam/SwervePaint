@@ -1,17 +1,38 @@
 package commands;
 
+import application.MyWindow;
+import tools.LocationVector;
+import tools.Shape;
+
 public class Size implements Command {
 
+	Shape _s;
+	LocationVector _oldStart;
+	LocationVector _oldEnd;
+	LocationVector _newStart;
+	LocationVector _newEnd;
+	
+	public Size(Shape s, LocationVector newS, LocationVector newE){
+		_s = s;
+		_oldStart = s.getPointStart();
+		_oldEnd = s.getPointEnd();
+		_newStart = newS;
+		_newEnd = newE; 
+	}
+	
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
-
+		_s.resizeThatShape(_newStart, _newEnd);
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public void unexecute() {
-		// TODO Auto-generated method stub
-
+		_s.setPointStart(_oldStart);
+		_s.setPointEnd(_oldEnd);
+		MyWindow x = new MyWindow();
+		x.getInstance().updateUI();
 	}
+
 
 }

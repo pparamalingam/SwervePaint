@@ -215,4 +215,10 @@ public class Line extends Shape {
 			setBorder(null);
 		}
 	}
+	
+	@Override
+	public void unselect() {
+		_selected = false;
+		
+	}
 }

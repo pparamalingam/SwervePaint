@@ -9,6 +9,7 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class Canvas extends Shape {
 		private List<Shape> _shapes = new ArrayList<Shape>();
+		private Boolean _selected = false;
 
 		public Canvas(LocationVector _tempFirstCoord,
 				LocationVector _tempSecondCoord, Color theColor, int theWeight,
@@ -95,6 +96,7 @@ public class Canvas extends Shape {
 		public void removeShapeListeners(){
 			for (int i = 0; i < _shapes.size(); i++){
 				removeMoveListener(_shapes.get(i));
+				_shapes.get(i).unselect();
 			}
 		}
 		
@@ -155,6 +157,12 @@ public class Canvas extends Shape {
 		@Override
 		public void selectThatShape() {
 			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void unselect() {
+			_selected = false;
 			
 		}
 }

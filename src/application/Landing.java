@@ -31,6 +31,9 @@ import java.awt.event.MouseEvent;
 import java.awt.Font;
 import javax.swing.JSeparator;
 
+import commands.Invoker;
+import commands.Size;
+
 @SuppressWarnings("serial")
 public class Landing extends JFrame {
 	public int MAXSIZE = Global.MAXSIZE;
@@ -90,6 +93,8 @@ public class Landing extends JFrame {
 	 */
 	@SuppressWarnings({ "static-access" })
 	public Landing() {
+		Invoker invokeACommand = new Invoker();
+		
 		setSize(new Dimension(800, 700));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -165,21 +170,44 @@ public class Landing extends JFrame {
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmAbout = new JMenuItem("About");
+		mnNewMenu.add(mntmAbout);
 		mntmAbout.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				JOptionPane jd = new JOptionPane("Made by Husain & Preshoth");
-				jd.setVisible(true);
+			public void mousePressed(MouseEvent e) {
+				JOptionPane.showMessageDialog(new JFrame(), "Made By Husain Fazal & Preshoth Paramalingam", "About", JOptionPane.DEFAULT_OPTION);
 				System.out.println("HELP");
 			}
 		});
-		mnNewMenu.add(mntmAbout);
+		
+		
+		mntmExit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				System.exit(0);
+			}
+		});
 		
 		_myWindow = new MyWindow();
 		_myWindow = _myWindow.getInstance();
 		_myWindow.setBorder(new EmptyBorder(5, 5, 5, 5));
 		_myWindow.setLayout(new BorderLayout(0, 0));
 		setContentPane(_myWindow);
+		
+		mntmUndo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Invoker invoker = new Invoker();
+				invoker.getInstance().undoLast();
+			}
+		});
+		
+		mntmRedo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Invoker invoker = new Invoker();
+				invoker.getInstance().redoLast();
+			}
+		});
 		
 		tglbtnMove.addMouseListener(new MouseAdapter() {
 			@Override

@@ -224,5 +224,10 @@ public class Triangle extends Shape {
 			setBorder(null);
 		}
 	}
+	@Override
+	public void unselect() {
+		_selected = false;
+		
+	}
 		
 }
