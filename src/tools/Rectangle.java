@@ -7,11 +7,11 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
 import application.MyWindow;
 
+@SuppressWarnings("serial")
 public class Rectangle extends Shape {
 
 	private MouseListener _ml;
@@ -117,28 +117,55 @@ public class Rectangle extends Shape {
 	}
 
 	@Override
-	public void addML() {
-		_ml = new MouseAdapter() {
-			private LocationVector nsl;
-			private LocationVector nel;
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				System.out.println("Pressed Shape: " + e.getX() + ", " + e.getY());
-				nsl = new LocationVector(e.getX(), e.getY());
+	public void addML(int x) {
+		if (x == 1){	// Move
+			_ml = new MouseAdapter() {
+				private LocationVector nsl;
+				private LocationVector nel;
 				
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				System.out.println("Released Shape: " + e.getX() + ", " + e.getY());
-				nel = new LocationVector(e.getX(), e.getY());
-				moveThatShape(nsl, nel);
-				MyWindow x = new MyWindow();
-				x.getInstance().updateUI();
-				//x.getInstance().getWidth();
-				System.out.println(x.getInstance().getWidth());
-			}
-		};
+				@Override
+				public void mousePressed(MouseEvent e) {
+					System.out.println("Pressed Rectangle: " + e.getX() + ", " + e.getY());
+					nsl = new LocationVector(e.getX(), e.getY());
+					
+				}
+				@SuppressWarnings("static-access")
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					System.out.println("Released Rectangle: " + e.getX() + ", " + e.getY());
+					nel = new LocationVector(e.getX(), e.getY());
+					moveThatShape(nsl, nel);
+					MyWindow x = new MyWindow();
+					x.getInstance().updateUI();
+					//x.getInstance().getWidth();
+					System.out.println(x.getInstance().getWidth());
+				}
+			};
+		}
+		else if (x == 2){	// Resize
+			_ml = new MouseAdapter() {
+				private LocationVector nsl;
+				private LocationVector nel;
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					System.out.println("Pressed Rectangle: " + e.getX() + ", " + e.getY());
+					nsl = new LocationVector(e.getX(), e.getY());
+					
+				}
+				@SuppressWarnings("static-access")
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					System.out.println("Released Rectangle: " + e.getX() + ", " + e.getY());
+					nel = new LocationVector(e.getX(), e.getY());
+					resizeThatShape(nsl, nel);
+					MyWindow x = new MyWindow();
+					x.getInstance().updateUI();
+					//x.getInstance().getWidth();
+					System.out.println(x.getInstance().getWidth());
+				}
+			};
+		}
 		this.addMouseListener(_ml);
 	}
 	
@@ -146,6 +173,11 @@ public class Rectangle extends Shape {
 	public void moveThatShape(LocationVector s, LocationVector e){
 		setPointStart(new LocationVector(_pointStart.get_x() +e.get_x(), _pointStart.get_y() + e.get_y()));
 		setPointEnd(new LocationVector(_pointEnd.get_x() + e.get_x(), _pointEnd.get_y() + e.get_y()));
+	}
+
+	@Override
+	public void resizeThatShape(LocationVector s, LocationVector e) {
+		setPointEnd(new LocationVector(_pointStart.get_x() +e.get_x(), _pointStart.get_y() + e.get_y()));
 	}
 
 }

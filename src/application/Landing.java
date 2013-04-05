@@ -4,31 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.BoxLayout;
-import javax.swing.JProgressBar;
-import java.awt.Button;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JToolBar;
-import java.awt.Component;
-import javax.swing.Box;
-import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JSlider;
-import javax.swing.JComboBox;
 import javax.swing.JMenuItem;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JToggleButton;
 
@@ -41,11 +28,10 @@ import tools.Triangle;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
 import java.awt.Font;
 import javax.swing.JSeparator;
 
+@SuppressWarnings("serial")
 public class Landing extends JFrame {
 	public static final int MAXSIZE = 500;
 	
@@ -76,9 +62,7 @@ public class Landing extends JFrame {
 	
 	//Select/Move
 	private JToggleButton tglbtnResize = new JToggleButton("Resize");
-	private JToggleButton tglbtnMove = new JToggleButton("Move");
-	
-	private boolean mouseListenerHasBeenUsed = false; 
+	private JToggleButton tglbtnMove = new JToggleButton("Move"); 
 	
 	/**
 	 * Launch the application.
@@ -103,6 +87,7 @@ public class Landing extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings({ "static-access" })
 	public Landing() {
 		setSize(new Dimension(800, 700));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -198,7 +183,16 @@ public class Landing extends JFrame {
 		tglbtnMove.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				_bigCanvas.addShapeListeners();
+				_bigCanvas.removeShapeListeners();
+				_bigCanvas.addShapeListeners(1);
+			}
+		});
+		
+		tglbtnResize.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				_bigCanvas.removeShapeListeners();
+				_bigCanvas.addShapeListeners(2);
 			}
 		});
 		
@@ -268,11 +262,6 @@ public class Landing extends JFrame {
 					System.out.println(shape);
 					_bigCanvas.addToShapeList(shape);
 				}
-				/*else if (tglbtnMove.isSelected()){
-					mouseListenerHasBeenUsed = true;
-					System.out.println("move is selected");
-					_bigCanvas.addShapeListeners();
-				}*/
 				else if (tglbtnResize.isSelected()){
 					_bigCanvas.removeShapeListeners();
 					System.out.println("resize is selected");

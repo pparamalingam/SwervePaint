@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "serial" })
 public abstract class Shape extends JPanel{
 	protected MouseListener _ml;
 	protected LocationVector _pointStart;
@@ -35,6 +35,7 @@ public abstract class Shape extends JPanel{
 	public abstract void setMl(MouseListener m);
 	
 	public abstract boolean resize(LocationVector start, LocationVector end);
-	public abstract void addML();
+	public abstract void addML(int x);
 	public abstract void moveThatShape(LocationVector s, LocationVector e);
+	public abstract void resizeThatShape(LocationVector s, LocationVector e);
 }

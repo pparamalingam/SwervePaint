@@ -2,12 +2,11 @@ package tools;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class Canvas extends Shape {
 		private List<Shape> _shapes = new ArrayList<Shape>();
 
@@ -86,9 +85,9 @@ public class Canvas extends Shape {
 			_shapes.add(x);
 		}
 		
-		public void addShapeListeners(){
+		public void addShapeListeners(int x){
 			for (int i = 0; i < _shapes.size(); i++){
-				addMoveListener(_shapes.get(i));
+				addMoveListener(_shapes.get(i), x);
 				System.out.println("swerve1");
 			}
 		}
@@ -113,8 +112,8 @@ public class Canvas extends Shape {
 			}
 	    }
 
-		public void addMoveListener(Shape s) {
-			s.addML();
+		public void addMoveListener(Shape s, int type) {
+			s.addML(type);
 		}
 
 		public void removeMoveListener(Shape s) {
@@ -133,14 +132,21 @@ public class Canvas extends Shape {
 		}
 
 		@Override
-		public void addML() {
+		public void moveThatShape(LocationVector s, LocationVector e) {
 			// gtfo
+			//will be used to move groups
+		}
+
+		@Override
+		public void addML(int x) {
+			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
-		public void moveThatShape(LocationVector s, LocationVector e) {
+		public void resizeThatShape(LocationVector s, LocationVector e) {
 			// gtfo
-			//will be used to move groups
+			// will be used to resize groups
+			
 		}
 }
