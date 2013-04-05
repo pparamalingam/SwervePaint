@@ -32,6 +32,7 @@ import java.awt.event.MouseEvent;
 import java.awt.Font;
 import javax.swing.JSeparator;
 
+import commands.CanvasComponent;
 import commands.Invoker;
 import commands.Size;
 
@@ -231,8 +232,25 @@ public class Landing extends JFrame {
 		rdbtnmntmBlack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				//Invoker invoker = new Invoker();
-				//invoker.getInstance().redoLast();
+				_bigCanvas.setColor(Color.BLACK);
+			}
+		});
+		rdbtnmntmRed.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				_bigCanvas.setColor(Color.RED);
+			}
+		});
+		rdbtnmntmGreen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				_bigCanvas.setColor(Color.GREEN);
+			}
+		});
+		rdbtnmntmBlue.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				_bigCanvas.setColor(Color.BLUE);
 			}
 		});
 		
@@ -333,23 +351,27 @@ public class Landing extends JFrame {
 				//Check for shape
 				if (tglbtnLine.isSelected()){
 					Line shape = new Line(_tempFirstCoord, _tempSecondCoord, theColor, theWeight, theStyle);
-					_bigCanvas.addToShapeList(shape);
-					System.out.println("Make a Line at: " + _tempFirstCoord + " and " + _tempSecondCoord);
+					CanvasComponent cmd = new CanvasComponent(_bigCanvas, shape);
+					Invoker invoker = new Invoker();
+					invoker.getInstance().storeAndExecute(cmd);
 				}
 				else if (tglbtnRectangle.isSelected()){
 					Rectangle shape = new Rectangle(_tempFirstCoord, _tempSecondCoord, theColor, theWeight, theStyle);
-					_bigCanvas.addToShapeList(shape);
-					System.out.println("Make a Rectangle at: " + _tempFirstCoord + " and " + _tempSecondCoord);
+					CanvasComponent cmd = new CanvasComponent(_bigCanvas, shape);
+					Invoker invoker = new Invoker();
+					invoker.getInstance().storeAndExecute(cmd);
 				}
 				else if (tglbtnTriangle.isSelected()){
 					Triangle shape = new Triangle(_tempFirstCoord, _tempSecondCoord, theColor, theWeight, theStyle);
-					_bigCanvas.addToShapeList(shape);
-					System.out.println("Make a triangle at: " + _tempFirstCoord + " and " + _tempSecondCoord);
+					CanvasComponent cmd = new CanvasComponent(_bigCanvas, shape);
+					Invoker invoker = new Invoker();
+					invoker.getInstance().storeAndExecute(cmd);
 				}
 				else if (tglbtnCircle.isSelected()){
 					Circle shape = new Circle(_tempFirstCoord, _tempSecondCoord, theColor, theWeight, theStyle);
-					_bigCanvas.addToShapeList(shape);
-					System.out.println("Make a Circle at: " + _tempFirstCoord + " and " + _tempSecondCoord);
+					CanvasComponent cmd = new CanvasComponent(_bigCanvas, shape);
+					Invoker invoker = new Invoker();
+					invoker.getInstance().storeAndExecute(cmd);
 				}
 
 				_myWindow.updateUI();

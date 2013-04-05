@@ -8,6 +8,7 @@ import java.util.List;
 
 import application.MyWindow;
 
+import commands.Colour;
 import commands.Invoker;
 import commands.Move;
 import commands.Stroke;
@@ -29,31 +30,26 @@ public class Canvas extends Shape {
 
 		@Override
 		public LocationVector getPointStart() {
-			// TODO Auto-generated method stub
 			return _pointStart;
 		}
 
 		@Override
 		public LocationVector getPointEnd() {
-			// TODO Auto-generated method stub
 			return _pointEnd;
 		}
 
 		@Override
 		public Color getColor() {
-			// TODO Auto-generated method stub
 			return _color;
 		}
 
 		@Override
 		public int getWeight() {
-			// TODO Auto-generated method stub
 			return _weight;
 		}
 
 		@Override
 		public int getStyle() {
-			// TODO Auto-generated method stub
 			return _style;
 		}
 
@@ -65,11 +61,6 @@ public class Canvas extends Shape {
 		@Override
 		public void setPointEnd(LocationVector x) {
 			_pointEnd = x;
-		}
-
-		@Override
-		public void setColor(Color x) {
-			_color = x;
 		}
 
 		@Override
@@ -94,10 +85,27 @@ public class Canvas extends Shape {
 			MyWindow mywindow = new MyWindow();
 			mywindow.getInstance().updateUI();
 		}
+		
+		@Override
+		public void setColor(Color x) {
+			List<Shape> _temp = new ArrayList<Shape>();
+			System.out.println("Called Set Style " + x);
+			for (int i = 0; i < _shapes.size(); i++){
+				System.out.println("FOUND A SHAPE");
+				if (_shapes.get(i).isSelected()){
+					System.out.println("FOUND A SELECTED SHAPE");
+					_temp.add(_shapes.get(i));
+				}
+			}
+			Invoker invoker = new Invoker();
+			Colour cmd = new Colour(_temp, x);
+			invoker.getInstance().storeAndExecute(cmd);
+			MyWindow mywindow = new MyWindow();
+			mywindow.getInstance().updateUI();
+		}
 
 		@Override
 		public boolean resize(LocationVector start, LocationVector end) {
-			// TODO Auto-generated method stub
 			return false;
 		}
 		
@@ -186,5 +194,9 @@ public class Canvas extends Shape {
 		@Override
 		public boolean isSelected() {
 			return _selected;
+		}
+
+		public void removeLastFromShapeList() {
+			_shapes.remove(_shapes.size()-1);
 		}
 }

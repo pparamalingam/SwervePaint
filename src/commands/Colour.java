@@ -1,29 +1,38 @@
 package commands;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 import tools.Shape;
 
 public class Colour implements Command {
 
-	Shape _s;
-	Color _c;
-	Color _oldColour;
+	List<Shape> _s = new ArrayList<Shape>();
+	List<Color> _oldC = new ArrayList<Color>();
+	Color _newColour;
 	
-	public Colour(Shape s, Color c){
+	public Colour(List<Shape> s, Color c){
 		_s = s;
-		_c = c;
-		_oldColour = s.getColor();
+		_newColour = c;
+		for (int i = 0; i < _s.size(); i++){
+			_oldC.add(_s.get(i).getColor());
+		}
 	}
 	
 	@Override
 	public void execute() {
-		_s.setColor(_c);
+		for (int i = 0; i < _s.size(); i++){
+			_s.get(i).setColor(_newColour);
+		}
 	}
 
 	@Override
 	public void unexecute() {
-		_s.setColor(_oldColour);
+		for (int i = 0; i < _s.size(); i++){
+			System.out.println("OLD INT TO GO BACK TO " + _oldC.get(i));
+			_s.get(i).setColor(_oldC.get(i));
+		}
 	}
 
 }
