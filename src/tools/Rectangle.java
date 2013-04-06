@@ -235,4 +235,17 @@ public class Rectangle extends Shape {
 		return _selected;
 	}
 
+	@Override
+	public Shape getACopy() {
+		Rectangle r = new Rectangle(null, null, null, 0, 0);
+		r.setPointStart(getPointStart().getACopy());
+		r.setPointEnd(getPointEnd().getACopy());
+		r.setColor(getColor());
+		r.setWeight(getWeight());
+		r.setStyle(getStyle());
+		r.getPointStart().offsetTheCoordinate(10);
+		r.getPointEnd().offsetTheCoordinate(10);
+		return r;
+	}
+
 }

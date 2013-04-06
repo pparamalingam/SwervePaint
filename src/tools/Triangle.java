@@ -234,4 +234,17 @@ public class Triangle extends Shape {
 	public boolean isSelected() {
 		return _selected;
 	}
+
+	@Override
+	public Shape getACopy() {
+		Triangle t = new Triangle(null, null, null, 0, 0);
+		t.setPointStart(getPointStart().getACopy());
+		t.setPointEnd(getPointEnd().getACopy());
+		t.setColor(getColor());
+		t.setWeight(getWeight());
+		t.setStyle(getStyle());
+		t.getPointStart().offsetTheCoordinate(10);
+		t.getPointEnd().offsetTheCoordinate(10);
+		return t;
+	}
 }

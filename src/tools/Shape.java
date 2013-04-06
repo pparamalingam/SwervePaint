@@ -38,6 +38,7 @@ public abstract class Shape extends JPanel{
 	public abstract boolean resize(LocationVector start, LocationVector end);
 	public abstract void addML(int x);
 	public abstract void unselect();
+	public abstract Shape getACopy();
 	
 	public abstract void moveThatShape(LocationVector s, LocationVector e);
 	public abstract void resizeThatShape(LocationVector s, LocationVector e);

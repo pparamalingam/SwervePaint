@@ -226,4 +226,17 @@ public class Circle extends Shape {
 	public boolean isSelected() {
 		return _selected;
 	}
+
+	@Override
+	public Shape getACopy() {
+		Circle c = new Circle(null, null, null, 0, 0);
+		c.setPointStart(getPointStart().getACopy());
+		c.setPointEnd(getPointEnd().getACopy());
+		c.setColor(getColor());
+		c.setWeight(getWeight());
+		c.setStyle(getStyle());
+		c.getPointStart().offsetTheCoordinate(10);
+		c.getPointEnd().offsetTheCoordinate(10);
+		return c;
+	}
 }

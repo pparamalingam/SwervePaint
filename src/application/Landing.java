@@ -136,6 +136,15 @@ public class Landing extends JFrame {
 		JMenuItem mntmPaste = new JMenuItem("Paste");
 		mnEdit.add(mntmPaste);
 		
+		JSeparator separator_2 = new JSeparator();
+		mnEdit.add(separator_2);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Group");
+		mnEdit.add(mntmNewMenuItem);
+		
+		JMenuItem mntmUngroup = new JMenuItem("Ungroup");
+		mnEdit.add(mntmUngroup);
+		
 		
 		JMenu mnShapeOptions = new JMenu("Shape Options");
 		menuBar.add(mnShapeOptions);
@@ -305,7 +314,19 @@ public class Landing extends JFrame {
 			}
 		});
 		
+		mntmCopy.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				_bigCanvas.copySelected();
+			}
+		});
 		
+		mntmPaste.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				_bigCanvas.pasteBuffer();
+			}
+		});
 		
 		_bigCanvas.addMouseListener(new MouseAdapter() {
 			@Override

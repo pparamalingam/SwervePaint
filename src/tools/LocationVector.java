@@ -41,6 +41,16 @@ public class LocationVector {
 	public void set_y(int _y) {
 		this._y = _y;
 	}
+	public void offsetTheCoordinate(int offset){
+		this._x = this._x - offset;
+		this._y = this._y - offset;
+	}
+	public LocationVector getACopy(){
+		LocationVector lv = new LocationVector(0, 0);
+		lv.set_x(this.get_x());
+		lv.set_y(this.get_y());
+		return lv;
+	}
 	
 	
 }

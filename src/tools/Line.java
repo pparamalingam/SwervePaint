@@ -226,4 +226,17 @@ public class Line extends Shape {
 	public boolean isSelected() {
 		return _selected;
 	}
+
+	@Override
+	public Shape getACopy() {
+		Line l = new Line(null, null, null, 0, 0);
+		l.setPointStart(getPointStart().getACopy());
+		l.setPointEnd(getPointEnd().getACopy());
+		l.setColor(getColor());
+		l.setWeight(getWeight());
+		l.setStyle(getStyle());
+		l.getPointStart().offsetTheCoordinate(10);
+		l.getPointEnd().offsetTheCoordinate(10);
+		return l;
+	}
 }

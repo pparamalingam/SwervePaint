@@ -9,7 +9,9 @@ import java.util.List;
 import application.MyWindow;
 
 import commands.Colour;
+import commands.Copy;
 import commands.Invoker;
+import commands.Paste;
 import commands.Stroke;
 import commands.Thickness;
 
@@ -62,7 +64,15 @@ public class Canvas extends Shape {
 		public void setPointEnd(LocationVector x) {
 			_pointEnd = x;
 		}
+		
+		public int getShapeListSize(){
+			return _shapes.size();
+		}
 
+		public List<Shape> getShapeList(){
+			return _shapes;
+		}
+		
 		@Override
 		public void setWeight(int x) {
 			List<Shape> _temp = new ArrayList<Shape>();
@@ -212,6 +222,33 @@ public class Canvas extends Shape {
 		public void removeLastFromShapeList() {
 			_shapes.get(_shapes.size()-1).setVisible(false);
 			_shapes.remove(_shapes.size()-1);
+		}
+
+		public void pasteBuffer() {
+			Invoker invoker = new Invoker();
+			Paste cmd = new Paste(this);
+			invoker.getInstance().storeAndExecute(cmd);
+			MyWindow mywindow = new MyWindow();
+			mywindow.getInstance().updateUI();
+		}
+
+		public void copySelected() {
+			List<Shape> _temp = new ArrayList<Shape>();
+			for (int i = 0; i < _shapes.size(); i++){
+				if (_shapes.get(i).isSelected()){
+					_temp.add(_shapes.get(i));
+				}
+			}
+			Invoker invoker = new Invoker();
+			Copy cmd = new Copy(_temp);
+			invoker.getInstance().storeAndExecute(cmd);
+			MyWindow mywindow = new MyWindow();
+			mywindow.getInstance().updateUI();
+		}
+
+		@Override
+		public Shape getACopy() {
+			return null;
 		}
 
 }
