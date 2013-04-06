@@ -2,10 +2,11 @@ package application;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JToolBar;
@@ -34,7 +35,6 @@ import javax.swing.JSeparator;
 
 import commands.CanvasComponent;
 import commands.Invoker;
-import commands.Size;
 
 @SuppressWarnings("serial")
 public class Landing extends JFrame {
@@ -99,6 +99,7 @@ public class Landing extends JFrame {
 	 */
 	@SuppressWarnings({ "static-access" })
 	public Landing() {
+		@SuppressWarnings("unused")
 		Invoker invokeACommand = new Invoker();
 		
 		setSize(new Dimension(800, 700));
@@ -135,13 +136,6 @@ public class Landing extends JFrame {
 		JMenuItem mntmPaste = new JMenuItem("Paste");
 		mnEdit.add(mntmPaste);
 		
-		mnEdit.addSeparator();
-		
-		JMenuItem mntmGroup = new JMenuItem("Group");
-		mnEdit.add(mntmGroup);
-		
-		JMenuItem mntmUngroup = new JMenuItem("Ungroup");
-		mnEdit.add(mntmUngroup);
 		
 		JMenu mnShapeOptions = new JMenu("Shape Options");
 		menuBar.add(mnShapeOptions);
@@ -229,6 +223,14 @@ public class Landing extends JFrame {
 			}
 		});
 		
+		slider.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				if (!slider.getValueIsAdjusting()){
+					_bigCanvas.setWeight(slider.getValue());
+				}
+			}
+		});
 		rdbtnmntmBlack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

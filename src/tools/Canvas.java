@@ -10,10 +10,10 @@ import application.MyWindow;
 
 import commands.Colour;
 import commands.Invoker;
-import commands.Move;
 import commands.Stroke;
+import commands.Thickness;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({"serial", "static-access"})
 public class Canvas extends Shape {
 		private List<Shape> _shapes = new ArrayList<Shape>();
 		private Boolean _selected = false;
@@ -65,7 +65,20 @@ public class Canvas extends Shape {
 
 		@Override
 		public void setWeight(int x) {
-			_weight = x;
+			List<Shape> _temp = new ArrayList<Shape>();
+			System.out.println("Called Set Style " + x);
+			for (int i = 0; i < _shapes.size(); i++){
+				System.out.println("FOUND A SHAPE");
+				if (_shapes.get(i).isSelected()){
+					System.out.println("FOUND A SELECTED SHAPE");
+					_temp.add(_shapes.get(i));
+				}
+			}
+			Invoker invoker = new Invoker();
+			Thickness cmd = new Thickness(_temp, x);
+			invoker.getInstance().storeAndExecute(cmd);
+			MyWindow mywindow = new MyWindow();
+			mywindow.getInstance().updateUI();
 		}
 
 		@Override
@@ -197,6 +210,8 @@ public class Canvas extends Shape {
 		}
 
 		public void removeLastFromShapeList() {
+			_shapes.get(_shapes.size()-1).setVisible(false);
 			_shapes.remove(_shapes.size()-1);
 		}
+
 }
