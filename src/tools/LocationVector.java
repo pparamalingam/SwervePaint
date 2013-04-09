@@ -1,6 +1,8 @@
 package tools;
 
-public class LocationVector {
+import java.io.Serializable;
+
+public class LocationVector implements Serializable {
 	private int _x;
 	private int _y;
 	

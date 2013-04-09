@@ -8,8 +8,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
+import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.JFileChooser;
 
 import application.Global;
 import application.MyWindow;
@@ -238,5 +240,18 @@ public class Line extends Shape {
 		l.getPointStart().offsetTheCoordinate(10);
 		l.getPointEnd().offsetTheCoordinate(10);
 		return l;
+	}
+
+
+	@Override
+	public void saveCanvas(JFileChooser filename) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void openCanvas(JFileChooser filename) {
+		// TODO Auto-generated method stub
+		
 	}
 }

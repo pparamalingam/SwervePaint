@@ -5,11 +5,14 @@ import java.awt.Graphics;
 import java.awt.event.MouseListener;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
+import java.util.List;
 
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
 @SuppressWarnings({ "unused", "serial" })
-public abstract class Shape extends JPanel{
+public abstract class Shape extends JPanel implements Serializable{
 	protected MouseListener _ml;
 	protected LocationVector _pointStart;
 	protected LocationVector _pointEnd;
@@ -43,4 +46,7 @@ public abstract class Shape extends JPanel{
 	public abstract void moveThatShape(LocationVector s, LocationVector e);
 	public abstract void resizeThatShape(LocationVector s, LocationVector e);
 	public abstract void selectThatShape();
+	
+	public abstract void saveCanvas(JFileChooser filename);
+	public abstract void openCanvas(JFileChooser filename);
 }

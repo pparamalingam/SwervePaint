@@ -1,6 +1,12 @@
 package application;
 
+import java.io.ObjectInputStream;
+import java.util.List;
+
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+
+import tools.Shape;
 
 @SuppressWarnings("serial")
 public class MyWindow extends JPanel implements Window {
@@ -14,20 +20,20 @@ public class MyWindow extends JPanel implements Window {
 
 	@Override
 	public SwerveFile createFile() {
-		// TODO Auto-generated method stub
-		return null;
+		return factoryMethod();
 	}
 
 	@Override
-	public void newFile() {
-		// TODO Auto-generated method stub
+	public void newFile(JFileChooser filename, List<Shape> shapes) {
+		SwerveFile file = createFile();
+		file.save(filename, shapes);
 		
 	}
 
 	@Override
-	public void openFile() {
-		// TODO Auto-generated method stub
-		
+	public Object openFile(JFileChooser filename) {
+		SwerveFile file = createFile();
+		return file.open(filename);
 	}
 	
 	SwerveFile factoryMethod(){

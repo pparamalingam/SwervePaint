@@ -3,8 +3,11 @@ package tools;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JFileChooser;
 
 import application.MyWindow;
 
@@ -249,6 +252,21 @@ public class Canvas extends Shape {
 		@Override
 		public Shape getACopy() {
 			return null;
+		}
+
+		@Override
+		public void saveCanvas(JFileChooser filename) {
+			MyWindow mywindow = new MyWindow();
+			mywindow.newFile(filename, _shapes);
+			
+		}
+
+		@Override
+		public void openCanvas(JFileChooser filename) {
+			MyWindow mywindow = new MyWindow();
+			_shapes = (List<Shape>) mywindow.openFile(filename);
+			mywindow.getInstance().updateUI();
+			
 		}
 
 }

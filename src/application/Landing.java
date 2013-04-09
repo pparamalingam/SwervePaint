@@ -15,6 +15,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JSlider;
 import javax.swing.JMenuItem;
@@ -31,6 +32,8 @@ import tools.Triangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
+import java.io.File;
+
 import javax.swing.JSeparator;
 
 import commands.CanvasComponent;
@@ -325,6 +328,34 @@ public class Landing extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				_bigCanvas.pasteBuffer();
+			}
+		});
+		
+		mntmSave.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setDialogTitle("Specify a file to save");    
+				 
+				int userSelection = fileChooser.showSaveDialog(_myWindow);
+				//System.out.println(fileChooser.getSelectedFile());
+				if (userSelection == fileChooser.APPROVE_OPTION){
+					_bigCanvas.saveCanvas(fileChooser);
+				}
+			}
+		});
+		
+		mntmOpen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.setDialogTitle("Specify a file to open");    
+				 
+				int userSelection = fileChooser.showOpenDialog(_myWindow);
+				//System.out.println(fileChooser.getSelectedFile());
+				if (userSelection == fileChooser.APPROVE_OPTION){
+					_bigCanvas.openCanvas(fileChooser);
+				}
 			}
 		});
 		

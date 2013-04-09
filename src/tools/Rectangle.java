@@ -8,8 +8,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D;
+import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.JFileChooser;
 
 import commands.Invoker;
 import commands.Move;
@@ -246,6 +248,18 @@ public class Rectangle extends Shape {
 		r.getPointStart().offsetTheCoordinate(10);
 		r.getPointEnd().offsetTheCoordinate(10);
 		return r;
+	}
+
+	@Override
+	public void saveCanvas(JFileChooser filename) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void openCanvas(JFileChooser filename) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
