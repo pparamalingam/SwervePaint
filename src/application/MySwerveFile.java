@@ -45,13 +45,17 @@ public class MySwerveFile implements SwerveFile {
 	@Override
 	public void save(JFileChooser filename, List<Shape> shapes) {
 		file = filename.getSelectedFile();
+		String path = file.getPath() + ".swerve";
+		file = new File(path);
 		FileOutputStream fileOut = null;
+		
 		try {
 			fileOut = new FileOutputStream(file);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			out.writeObject(shapes);
