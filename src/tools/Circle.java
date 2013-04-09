@@ -20,7 +20,7 @@ import application.MyWindow;
 @SuppressWarnings("serial")
 public class Circle extends Shape {
 	
-	private MouseListener _ml;
+	private transient MouseListener _ml;
 	private Boolean _selected = false;
 
 	public Circle(LocationVector _tempFirstCoord,

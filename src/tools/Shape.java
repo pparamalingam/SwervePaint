@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 @SuppressWarnings({ "unused", "serial" })
 public abstract class Shape extends JPanel implements Serializable{
-	protected MouseListener _ml;
+	protected transient MouseListener _ml;
 	protected LocationVector _pointStart;
 	protected LocationVector _pointEnd;
 	protected Color _color;

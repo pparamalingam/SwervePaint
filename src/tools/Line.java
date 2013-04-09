@@ -19,7 +19,7 @@ import application.MyWindow;
 @SuppressWarnings("serial")
 public class Line extends Shape {
 
-	private MouseListener _ml;
+	private transient MouseListener _ml;
 	private Boolean _selected = false;
 	
 	public Line(LocationVector _tempFirstCoord,

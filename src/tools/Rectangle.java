@@ -23,7 +23,7 @@ import application.MyWindow;
 @SuppressWarnings("serial")
 public class Rectangle extends Shape {
 
-	private MouseListener _ml;
+	private transient MouseListener _ml;
 	private Boolean _selected = false;
 	
 	public Rectangle(LocationVector _tempFirstCoord,
