@@ -46,7 +46,8 @@ public class MySwerveFile implements SwerveFile {
 	public void save(JFileChooser filename, List<Shape> shapes) {
 		file = filename.getSelectedFile();
 		String path = file.getPath() + ".swerve";
-		file = new File(path);
+		if (!path.contains(".swerve"))
+			file = new File(path);
 		FileOutputStream fileOut = null;
 		
 		try {
