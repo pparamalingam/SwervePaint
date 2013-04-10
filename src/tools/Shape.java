@@ -37,6 +37,7 @@ public abstract class Shape extends JPanel implements Serializable{
 	public abstract void setWeight(int x);
 	public abstract void setStyle(int x);
 	public abstract void setMl(MouseListener m);
+	public abstract void setGroup();
 	
 	public abstract boolean resize(LocationVector start, LocationVector end);
 	public abstract void addML(int x);
@@ -47,6 +48,4 @@ public abstract class Shape extends JPanel implements Serializable{
 	public abstract void resizeThatShape(LocationVector s, LocationVector e);
 	public abstract void selectThatShape();
 	
-	public abstract void saveCanvas(JFileChooser filename);
-	public abstract void openCanvas(JFileChooser filename);
 }

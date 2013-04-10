@@ -142,8 +142,8 @@ public class Landing extends JFrame {
 		JSeparator separator_2 = new JSeparator();
 		mnEdit.add(separator_2);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Group");
-		mnEdit.add(mntmNewMenuItem);
+		JMenuItem mntmGroup = new JMenuItem("Group");
+		mnEdit.add(mntmGroup);
 		
 		JMenuItem mntmUngroup = new JMenuItem("Ungroup");
 		mnEdit.add(mntmUngroup);
@@ -356,6 +356,21 @@ public class Landing extends JFrame {
 				if (userSelection == fileChooser.APPROVE_OPTION){
 					_bigCanvas.openCanvas(fileChooser);
 				}
+			}
+		});
+		
+		mntmGroup.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				_bigCanvas.setGroup();
+				   
+			}
+		});
+		
+		mntmUngroup.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				   
 			}
 		});
 		

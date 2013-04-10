@@ -142,7 +142,6 @@ public class Rectangle extends Shape {
 				@SuppressWarnings("static-access")
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					//System.out.println("Released Rectangle: " + e.getX() + ", " + e.getY());
 					nel = new LocationVector(e.getX(), e.getY());
 					Invoker invoker = new Invoker();
 					Move cmd = new Move(getThis(), nsl, nel);
@@ -251,15 +250,11 @@ public class Rectangle extends Shape {
 	}
 
 	@Override
-	public void saveCanvas(JFileChooser filename) {
+	public void setGroup() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void openCanvas(JFileChooser filename) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }

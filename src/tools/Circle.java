@@ -14,6 +14,9 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 
+import commands.Invoker;
+import commands.Move;
+
 import application.Global;
 import application.MyWindow;
 
@@ -139,13 +142,12 @@ public class Circle extends Shape {
 				@SuppressWarnings("static-access")
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					System.out.println("Released Circle: " + e.getX() + ", " + e.getY());
 					nel = new LocationVector(e.getX(), e.getY());
-					moveThatShape(nsl, nel);
+					Invoker invoker = new Invoker();
+					Move cmd = new Move(getThis(), nsl, nel);
+					invoker.getInstance().storeAndExecute(cmd);
 					MyWindow x = new MyWindow();
 					x.getInstance().updateUI();
-					//x.getInstance().getWidth();
-					System.out.println(x.getInstance().getWidth());
 				}
 			};
 		}
@@ -219,6 +221,10 @@ public class Circle extends Shape {
 		}
 	}
 	
+	public Shape getThis(){
+		return this;
+	}
+	
 	@Override
 	public void unselect() {
 		_selected = false;
@@ -244,14 +250,10 @@ public class Circle extends Shape {
 	}
 
 	@Override
-	public void saveCanvas(JFileChooser filename) {
+	public void setGroup() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void openCanvas(JFileChooser filename) {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

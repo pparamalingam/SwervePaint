@@ -13,6 +13,10 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
 
+import commands.Invoker;
+import commands.Move;
+import commands.Size;
+
 import application.Global;
 import application.MyWindow;
 
@@ -131,20 +135,19 @@ public class Line extends Shape {
 				
 				@Override
 				public void mousePressed(MouseEvent e) {
-					System.out.println("Pressed Line: " + e.getX() + ", " + e.getY());
+					//System.out.println("Pressed Rectangle: " + e.getX() + ", " + e.getY());
 					nsl = new LocationVector(e.getX(), e.getY());
 					
 				}
 				@SuppressWarnings("static-access")
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					System.out.println("Released Line: " + e.getX() + ", " + e.getY());
 					nel = new LocationVector(e.getX(), e.getY());
-					moveThatShape(nsl, nel);
+					Invoker invoker = new Invoker();
+					Move cmd = new Move(getThis(), nsl, nel);
+					invoker.getInstance().storeAndExecute(cmd);
 					MyWindow x = new MyWindow();
 					x.getInstance().updateUI();
-					//x.getInstance().getWidth();
-					System.out.println(x.getInstance().getWidth());
 				}
 			};
 		}
@@ -155,20 +158,20 @@ public class Line extends Shape {
 				
 				@Override
 				public void mousePressed(MouseEvent e) {
-					System.out.println("Pressed Line: " + e.getX() + ", " + e.getY());
+					//System.out.println("Pressed Rectangle: " + e.getX() + ", " + e.getY());
 					nsl = new LocationVector(e.getX(), e.getY());
 					
 				}
 				@SuppressWarnings("static-access")
 				@Override
 				public void mouseReleased(MouseEvent e) {
-					System.out.println("Released Line: " + e.getX() + ", " + e.getY());
+					//System.out.println("Released Rectangle: " + e.getX() + ", " + e.getY());
 					nel = new LocationVector(e.getX(), e.getY());
-					resizeThatShape(nsl, nel);
+					Invoker invoker = new Invoker();
+					Size cmd = new Size(getThis(), nsl, nel);
+					invoker.getInstance().storeAndExecute(cmd);
 					MyWindow x = new MyWindow();
 					x.getInstance().updateUI();
-					//x.getInstance().getWidth();
-					System.out.println(x.getInstance().getWidth());
 				}
 			};
 		}
@@ -218,6 +221,10 @@ public class Line extends Shape {
 		}
 	}
 	
+	public Shape getThis(){
+		return this;
+	}
+	
 	@Override
 	public void unselect() {
 		_selected = false;
@@ -242,16 +249,12 @@ public class Line extends Shape {
 		return l;
 	}
 
-
 	@Override
-	public void saveCanvas(JFileChooser filename) {
+	public void setGroup() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void openCanvas(JFileChooser filename) {
-		// TODO Auto-generated method stub
-		
-	}
+
+
 }
