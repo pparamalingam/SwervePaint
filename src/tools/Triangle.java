@@ -104,9 +104,9 @@ public class Triangle extends Shape {
 
 	     g2.setColor(this._color);
 	     
-	     Line2D.Float l1 = new Line2D.Float(0, 0, _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y());
+	     Line2D.Float l1 = new Line2D.Float(0, 0, Math.abs(_pointEnd.get_x()-_pointStart.get_x()),Math.abs(_pointEnd.get_y()-_pointStart.get_y()));
 	     Line2D.Float l2 = new Line2D.Float(0, 0, 0, _pointEnd.get_y());
-	     Line2D.Float l3 = new Line2D.Float(0, _pointEnd.get_y()-_pointStart.get_y()+9, _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y());
+	     Line2D.Float l3 = new Line2D.Float(0, Math.abs(_pointEnd.get_y()-_pointStart.get_y())+9, Math.abs(_pointEnd.get_x()-_pointStart.get_x()), Math.abs(_pointEnd.get_y()-_pointStart.get_y()));
 	     
 /*	     Line2D.Float l1 = new Line2D.Float(0, 0, _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y());
 	     Line2D.Float l2 = new Line2D.Float(0, 0, 0, _pointEnd.get_y());

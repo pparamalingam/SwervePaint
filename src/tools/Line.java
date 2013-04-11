@@ -101,9 +101,9 @@ public class Line extends Shape {
     public void paintComponent(Graphics g) {
 		super.paintComponent(g); 
 	     Graphics2D g2 = (Graphics2D) g; 
-
+	     Line2D.Float sign1; 
 	     g2.setColor(this._color);
-	     Line2D.Float sign1 = new Line2D.Float(5, 5, _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y()); 
+	     sign1 = new Line2D.Float(5, 5, Math.abs(_pointEnd.get_x()-_pointStart.get_x()),Math.abs( _pointEnd.get_y()-_pointStart.get_y())); 
 	     
 	     if (_style == 0){	//dashed
 	    	 float f1[] = {12.0f};

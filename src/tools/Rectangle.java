@@ -103,7 +103,7 @@ public class Rectangle extends Shape {
 	     Graphics2D g2 = (Graphics2D) g; 
 
 	     g2.setColor(this._color);
-	     Rectangle2D.Float sign1 = new Rectangle2D.Float(5, 5, _pointEnd.get_x()-_pointStart.get_x(), _pointEnd.get_y()-_pointStart.get_y()); 
+	      Rectangle2D.Float sign1 = new Rectangle2D.Float(5, 5, Math.abs(_pointEnd.get_x()-_pointStart.get_x()),Math.abs( _pointEnd.get_y()-_pointStart.get_y())); 
 	     
 	     if (_style == 0){	//dashed
 	    	 float f1[] = {12.0f};

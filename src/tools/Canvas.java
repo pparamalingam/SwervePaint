@@ -203,8 +203,19 @@ public class Canvas extends Shape {
 			Shape shapeInstance = _shapes.get(i);
 			shapeInstance.setOpaque(false);
 			shapeInstance.setVisible(true);
-			shapeInstance.setLocation(shapeInstance.getPointStart().get_x(), shapeInstance.getPointStart().get_y());
-			shapeInstance.setSize(shapeInstance.getPointEnd().get_x()-shapeInstance.getPointStart().get_x()+10, shapeInstance.getPointEnd().get_y()-shapeInstance.getPointStart().get_y()+10);
+			//Top right to bottom left
+			if (shapeInstance.getPointEnd().get_x()-shapeInstance.getPointStart().get_x() < 0 && shapeInstance.getPointEnd().get_y()-shapeInstance.getPointStart().get_y() > 0)
+				shapeInstance.setLocation(shapeInstance.getPointEnd().get_x(), shapeInstance.getPointStart().get_y());
+			//Bottom left to top right
+			else if (shapeInstance.getPointEnd().get_y()-shapeInstance.getPointStart().get_y() < 0 && shapeInstance.getPointEnd().get_x()-shapeInstance.getPointStart().get_x() > 0)
+				shapeInstance.setLocation(shapeInstance.getPointStart().get_x(), shapeInstance.getPointEnd().get_y());
+			//Bottom right to top left
+			else if (shapeInstance.getPointEnd().get_y()-shapeInstance.getPointStart().get_y() < 0 && shapeInstance.getPointEnd().get_x()-shapeInstance.getPointStart().get_x() < 0)
+				shapeInstance.setLocation(shapeInstance.getPointEnd().get_x(), shapeInstance.getPointEnd().get_y());
+			//Top left to bottom right
+			else
+				shapeInstance.setLocation(shapeInstance.getPointStart().get_x(), shapeInstance.getPointStart().get_y());
+			shapeInstance.setSize(Math.abs(shapeInstance.getPointEnd().get_x()-shapeInstance.getPointStart().get_x())+10, Math.abs(shapeInstance.getPointEnd().get_y()-shapeInstance.getPointStart().get_y())+10);
 			this.add(shapeInstance);
 		}
 	}
