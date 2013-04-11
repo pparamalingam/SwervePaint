@@ -1,6 +1,9 @@
 package commands;
 
+import java.awt.Color;
 import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
 
 import tools.Canvas;
 import tools.Shape;
@@ -22,11 +25,8 @@ public class Ungroup implements Command {
 
  @Override
  public void unexecute() {
-	 for(Shape s : _c.getShapeList()) {
-		s.setVisible(false);
-	}
-	_c.getShapeList().clear(); 
-   _c.setShapeList(_oldC.getShapeList());
+	//_c = _oldC; 
+	_c.groupThemShapes();
  }
 
 }
