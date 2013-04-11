@@ -255,6 +255,18 @@ public class Line extends Shape {
 		
 	}
 
+	@Override
+	public boolean isCanvas() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setUngroup() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }

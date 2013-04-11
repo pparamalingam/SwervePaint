@@ -29,6 +29,7 @@ public abstract class Shape extends JPanel implements Serializable{
 	public abstract int getStyle();
 	public abstract MouseListener getMl();
 	public abstract boolean isSelected();
+	public abstract boolean isCanvas();
 	
 	//setters
 	public abstract void setPointStart(LocationVector x);
@@ -38,6 +39,7 @@ public abstract class Shape extends JPanel implements Serializable{
 	public abstract void setStyle(int x);
 	public abstract void setMl(MouseListener m);
 	public abstract void setGroup();
+	public abstract void setUngroup();
 	
 	public abstract boolean resize(LocationVector start, LocationVector end);
 	public abstract void addML(int x);

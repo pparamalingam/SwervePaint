@@ -370,7 +370,7 @@ public class Landing extends JFrame {
 		mntmUngroup.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				   
+				_bigCanvas.setUngroup();
 			}
 		});
 		
