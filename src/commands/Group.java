@@ -22,7 +22,10 @@ public class Group implements Command {
 
 	@Override
 	public void unexecute() {
-		_c.setBorder(null);
+		for(Shape s : _c.getShapeList()) {
+			s.setVisible(false);
+		}
+		_c.getShapeList().clear();
 		_c.setShapeList(_oldC);
 	}
 

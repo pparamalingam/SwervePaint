@@ -7,10 +7,10 @@ import tools.Shape;
 
 public class Ungroup implements Command {
  
- Canvas _c;
- ArrayList<Shape> _oldC = new ArrayList<Shape>();;
+ Canvas _c, _oldC;
+
  
- public Ungroup(Canvas curr, ArrayList<Shape> backup ){
+ public Ungroup(Canvas curr, Canvas backup ){
   _c = curr;
   _oldC = backup;
  }
@@ -22,8 +22,11 @@ public class Ungroup implements Command {
 
  @Override
  public void unexecute() {
-  _c.setBorder(null);
-  _c.setShapeList(_oldC);
+	 for(Shape s : _c.getShapeList()) {
+		s.setVisible(false);
+	}
+	_c.getShapeList().clear(); 
+   _c.setShapeList(_oldC.getShapeList());
  }
 
 }

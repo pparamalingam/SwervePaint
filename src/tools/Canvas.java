@@ -149,8 +149,9 @@ public class Canvas extends Shape {
 	public void setGroup() {
 		ArrayList<Shape> backupList = new ArrayList<Shape>();
 		for(Shape s : _shapes) {
-			backupList.add(s.getACopy());
+			backupList.add(s);
 		}
+		System.out.println(backupList + "  BACKUP");
 		System.out.println("Called Set Group ");
 		Invoker invoker = new Invoker();
 		Group cmd = new Group(this, backupList );
@@ -161,13 +162,15 @@ public class Canvas extends Shape {
 
 	@Override
 	public void setUngroup() {
-		ArrayList<Shape> backupList = new ArrayList<Shape>();
+		Canvas backup = null;
 		for(Shape s : _shapes) {
-			backupList.add(s.getACopy());
+			if (s.isSelected() && s.isCanvas()){
+				backup = (Canvas) s;
+			}
 		}
 		System.out.println("Called Set Ungroup ");
 		Invoker invoker = new Invoker();
-		Ungroup cmd = new Ungroup(this, backupList );
+		Ungroup cmd = new Ungroup(this, backup );
 		invoker.getInstance().storeAndExecute(cmd);
 		MyWindow mywindow = new MyWindow();
 		mywindow.getInstance().updateUI();
